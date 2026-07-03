@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>សហគមន៍ផ្សារអនឡាញផលិតផលខ្មែរ Khmer Artisan E-Market</title>
+  
+  <!-- React & ReactDOM (Production Builds) -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Babel for Browser JSX compiling (Highly Stable Version) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts for Elegant Khmer Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@100..900&family=Moul&family=Siemreap&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            khmerMaroon: '#2E0B11',
+            khmerMaroonLight: '#43141A',
+            khmerGold: '#D4AF37',
+            khmerBg: '#FAF7F2',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: 'Kantumruy Pro', 'Siemreap', sans-serif;
+      background-color: #FAF7F2;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .moul-font {
+      font-family: 'Moul', sans-serif;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    
+    /* --------------------------------------------------
+       PREMIUM "COOL/SOOTHING" ANIMATIONS & TRANSITIONS
+       -------------------------------------------------- */
+    
+    /* Sophisticated Smooth Page Loading slide & scale */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(24px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes fadeInScale {
+      from {
+        transform: scale(0.97) translateY(10px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes slowPan {
+      from {
+        background-position: 0% 50%;
+      }
+      to {
+        background-position: 100% 50%;
+      }
+    }
+    @keyframes slideDown {
+      from {
+        transform: translateY(-15px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Ultra-soothing Golden Particle Drift */
+    @keyframes driftUp {
+      0% {
+        transform: translateY(110vh) translateX(0) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.35;
+      }
+      90% {
+        opacity: 0.35;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(60px) scale(1.2);
+        opacity: 0;
+      }
+    }
+    
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .animate-scale-up {
+      animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .animate-slow-pan {
+      animation: slowPan 25s linear infinite alternate;
+    }
+    .animate-slide-down {
+      animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Transition utilities */
+    .hover-scale {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hover-scale:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 20px 35px -5px rgba(46, 11, 17, 0.08);
+    }
+
+    /* Elegant Sheen Shimmer effect on cards */
+    .shimmer-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(212, 175, 55, 0.18) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-25deg);
+      transition: none;
+    }
+    .shimmer-container:hover::after {
+      left: 150%;
+      transition: left 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Soft backdrop particle glow layer */
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.55) 0%, rgba(212, 175, 55, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .particle:nth-child(1) { width: 6px; height: 6px; left: 15%; animation: driftUp 18s linear infinite; animation-delay: 0s; }
+    .particle:nth-child(2) { width: 8px; height: 8px; left: 35%; animation: driftUp 22s linear infinite; animation-delay: -3s; }
+    .particle:nth-child(3) { width: 5px; height: 5px; left: 55%; animation: driftUp 16s linear infinite; animation-delay: -7s; }
+    .particle:nth-child(4) { width: 7px; height: 7px; left: 75%; animation: driftUp 20s linear infinite; animation-delay: -2s; }
+    .particle:nth-child(5) { width: 9px; height: 9px; left: 85%; animation: driftUp 24s linear infinite; animation-delay: -10s; }
+  </style>
+</head>
+
+<body class="text-stone-900 selection:bg-amber-900 selection:text-white">
+
+  <!-- React Root Container -->
+  <div id="root"></div>
+  
+
+  <!-- Register custom preset to force classic runtime and avoid import statement errors -->
+  <script>
+    Babel.registerPreset('custom-react', {
+      presets: [
+        [Babel.availablePresets['react'], { runtime: 'classic' }]
+      ]
+    });
+  </script>
+
+  <!-- React Component with Embedded JSX and Gemini AI API -->
+  <script type="text/babel" data-presets="custom-react">
+    
+    // Explicitly define React Hooks to avoid destructuring errors in classic mode
+    var useState = React.useState;
+    var useEffect = React.useEffect;
+    var useMemo = React.useMemo;
+
+    // បានកំណត់ និងបន្ថែមរាល់និយមន័យ Icons ទាំងអស់ឡើងវិញ ដើម្បីជៀសវាងបញ្ហា ReferenceError: undefined
+    var Icons = {
+      ShoppingCart: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      ),
+      Search: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      ),
+      Filter: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+      ),
+      MapPin: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      ),
+      X: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      ),
+      Send: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      ),
+      Star: ({ filled, onMouseEnter, onMouseLeave, onClick }) => (
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill={filled ? "#FBBF24" : "none"} 
+          stroke="#FBBF24" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+          className="transition-all duration-300 hover:scale-125 cursor-pointer hover:drop-shadow-[0_0_6px_rgba(251,191,36,0.7)] p-0.5"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      ),
+      Globe: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      ),
+      Share2: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      ),
+      Award: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+      ),
+      Phone: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 .81 2.7z"></path></svg>
+      ),
+      Mail: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      ),
+      Bot: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4M8 16h8M5 16v1M19 16v1"></path></svg>
+      ),
+      Loader2: () => (
+        <svg className="animate-spin animate-infinite" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+      ),
+      User: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      ),
+      Gift: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+      ),
+      BookOpen: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      ),
+      LogOut: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      ),
+      Camera: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle><line x1="12" y1="10" x2="12" y2="16"></line><line x1="9" y1="13" x2="15" y2="13"></line></svg>
+      )
+    };
+
+    var CATEGORIES = [
+      { id: 'all', name: { kh: 'ប្រភេទទាំងអស់', en: 'All Categories' }, icon: '✨' },
+      { id: 'food', name: { kh: 'កសិផល និងម្ហូបអាហារ', en: 'Agri-Food & Snacks' }, icon: '🌾' },
+      { id: 'fashion', name: { kh: 'សម្លៀកបំពាក់ និងម៉ូដ', en: 'Fashion & Handlooms' }, icon: '🧣' }
+    ];
+
+    var KHMER_PROVINCES = [
+      "ភ្នំពេញ (Phnom Penh)", "ខេត្តកណ្តាល (Kandal)", "ខេត្តសៀមរាប (Siem Reap)", 
+      "ខេត្តព្រះសីហនុ (Preah Sihanouk)", "ខេត្តបាត់ដំបង (Battambang)", "ខេត្តកំពង់ចាម (Kampong Cham)", 
+      "ខេត្តកំពង់ឆ្នាំង (Kampong Chhnang)", "ខេត្តកំពង់ធំ (Kampong Thom)", "ខេត្តកំពង់ស្ពឺ (Kampong Speu)", 
+      "ខេត្តកំពត (Kampot)", "ខេត្តកែប (Kep)", "ខេត្តកោះកុង (Koh Kong)", "ខេត្តក្រចេះ (Kratie)", 
+      "ខេត្តមណ្ឌលគិរី (Mondulkiri)", "ខេត្តរតនគិរី (Ratanakiri)", "ខេត្តព្រះវិហារ (Preah Vihear)", 
+      "ខេត្តស្ទឹងត្រែង (Stung Treng)", "ខេត្តព្រៃវែង (Prey Veng)", "ខេត្តស្វាយរៀង (Svay Rieng)", 
+      "ខេត្តតាកែវ (Takeo)", "ខេត្តពោធិ៍សាត់ (Pursat)", "ខេត្តបន្ទាយមានជ័យ (Banteay Meanchey)", 
+      "ខេត្តប៉ៃលិន (Pailin)", "ខេត្តឧត្តរមានជ័យ (Oddar Meanchey)", "ខេត្តត្បូងឃ្មុំ (Tboung Khmum)"
+    ];
+
+    var CATEGORIES = [
+      { id: 'all', name: { kh: 'ប្រភេទទាំងអស់', en: 'All Categories' }, icon: '✨' },
+      { id: 'food', name: { kh: 'កសិផល និងម្ហូបអាហារ', en: 'Agri-Food & Snacks' }, icon: '🌾' },
+      { id: 'fashion', name: { kh: 'សម្លៀកបំពាក់ និងម៉ូដ', en: 'Fashion & Handlooms' }, icon: '🧣' },
+      { id: 'beauty', name: { kh: 'សម្រស់ និងអនាម័យ', en: 'Beauty & Hygiene' }, icon: '🧼' }
+    ];
+
+    var PRODUCTS_DATA = [
+      {
+        id: 1,
+        name: { kh: "ទឹកដោះគោស្រស់ គីរីស៊ូ", en: "Kirisu Fresh Milk" },
+        category: "food",
+        price: 3.5,
+        rating: 4.9,
+        reviewsCount: 120,
+        image: "Image/KirisuMilk.jpg",
+        origin: { kh: "ខេត្តតាកែវ", en: "Takeo Province" },
+        description: {
+          kh: "ទឹកដោះគោស្រស់ធម្មជាតិ ១០០% ផលិតចេញពីកសិដ្ឋានស្តង់ដារក្នុងស្រុក មានរសជាតិឈ្ងុយឆ្ងាញ់ និងសម្បូរសារធាតុចិញ្ចឹម។",
+          en: "100% pure fresh milk from local high-standard farms, rich in nutrients and delicious taste."
+        },
+        details: { kh: "ចំណុះ ២លីត្រ, គ្មានសារធាតុរក្សាទុកយូរ", en: "2L Bottle, No Preservatives" },
+        technique: { kh: "បច្ចេកវិទ្យាកែច្នៃទំនើបពីអ៊ីស្រាអែល", en: "Modern Processing Technology from Israel" },
+        featured: true
+      },
+      {
+        id: 2,
+        name: { kh: "សាប៊ូកក់សក់ ឃ្លែន (KLEN)", en: "KLEN Shampoo" },
+        category: "beauty",
+        price: 4.5,
+        rating: 4.7,
+        reviewsCount: 85,
+        image: "Image/klen.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "សាប៊ូកក់សក់រូបមន្តពិសេស ជួយកាត់បន្ថយអង្គែ និងធ្វើឱ្យសក់មានសុខភាពល្អ ត្រជាក់ស្បែកក្បាល។",
+          en: "Special formula shampoo that helps reduce dandruff and keeps hair healthy with a cooling sensation."
+        },
+        details: { kh: "រូបមន្តពីប្រទេសកូរ៉េ", en: "Formula from Korea" },
+        technique: { kh: "បច្ចេកទេសផលិតតាមស្តង់ដារ ISO", en: "Standard ISO Manufacturing" },
+        featured: false
+      },
+      {
+        id: 3,
+        name: { kh: "មីជាតិ រសជាតិស៊ុបមាន់", en: "Mee Chiet Instant Noodle" },
+        category: "food",
+        price: 0.25,
+        rating: 4.8,
+        reviewsCount: 340,
+        image: "Image/មីជាតិ.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "មីកញ្ចប់ដំបូងគេបង្អស់ដែលមានរសជាតិខ្មែរពិតៗ ឆ្ងាញ់ ងាយស្រួលចម្អិន និងមានអនាម័យខ្ពស់។",
+          en: "The first instant noodle with authentic Khmer flavors, tasty, easy to cook, and hygienic."
+        },
+        details: { kh: "ទម្ងន់ ៦៥ក្រាម ក្នុងមួយកញ្ចប់", en: "65g per pack" },
+        technique: { kh: "ផលិតដោយម៉ាស៊ីនស្វ័យប្រវត្តិតាមស្តង់ដារជប៉ុន", en: "Automated Japanese Standard Production" },
+        featured: true
+      },
+      {
+        id: 4,
+        name: { kh: "បំពង់ទឺកឬស្សី (PRO VIDA)", en: "Pro Vida Spring Water" },
+        category: "food",
+        price: 0.35,
+        rating: 4.9,
+        reviewsCount: 95,
+        image: "Image/ប្រូវីដា.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "ទឹកពិសាធម្មជាតិដែលមានសារធាតុរ៉ែចាំបាច់សម្រាប់រាងកាយ ផ្តល់ភាពស្រស់ស្រាយគ្រប់ពេលវេលា។",
+          en: "Natural drinking water containing essential minerals, providing refreshment anytime."
+        },
+        details: { kh: "ចំណុះ ៥០០មីលីលីត្រ", en: "500ml Bottle" },
+        technique: { kh: "ចម្រោះតាមប្រព័ន្ធអូហ្សូន និងកាំរស្មីយូវី", en: "Ozone and UV Filtration System" },
+        featured: false
+      },
+      {
+        id: 5,
+        name: { kh: "សាប៊ូបោកខោអាវ អូរ៉ា (Ora)", en: "Ora Laundry Detergent" },
+        category: "beauty",
+        price: 6.5,
+        rating: 4.6,
+        reviewsCount: 56,
+        image: "Image/Ora.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "សាប៊ូបោកខោអាវដែលមានក្លិនក្រអូបជាប់បានយូរ និងបំបាត់ស្នាមប្រឡាក់បានយ៉ាងល្អឥតខ្ចោះ។",
+          en: "Laundry detergent with long-lasting fragrance and excellent stain removal."
+        },
+        details: { kh: "ចំណុះ ៣.៨លីត្រ", en: "3.8L Gallon" },
+        technique: { kh: "បច្ចេកវិទ្យាកម្ចាត់បាក់តេរី ៩៩%", en: "99% Anti-bacterial Technology" },
+        featured: false
+      },
+      {
+        id: 6,
+        name: { kh: "សាប៊ូលាងចាន ស្អាត (Saat)", en: "Saat Dishwashing Liquid" },
+        category: "beauty",
+        price: 2.8,
+        rating: 4.8,
+        reviewsCount: 78,
+        image: "Image/Saat.jpg",
+        origin: { kh: "ភ្ន_ពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "សាប៊ូលាងចានរូបមន្តក្រូចឆ្មារ និងប្រទាលកន្ទុយក្រពើ កម្ចាត់ខ្លាញ់បានលឿន និងមិនប៉ះពាល់ស្បែកដៃ។",
+          en: "Lemon and Aloe Vera formula dish soap, removes grease fast and is gentle on hands."
+        },
+        details: { kh: "ចំណុះ ៨០០មីលីលីត្រ", en: "800ml Bottle" },
+        technique: { kh: "រូបមន្តពីប្រទេសកូរ៉េ", en: "Formula from Korea" },
+        featured: false
+      },
+      {
+        id: 7,
+        name: { kh: "ម្សៅលាងបន្លែផ្លែឈើ សូដា (Soda Food)", en: "Soda Food Veggie Wash" },
+        category: "food",
+        price: 5.0,
+        rating: 4.9,
+        reviewsCount: 110,
+        image: "Image/Soda.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "ជួយជម្រះជាតិគីមី កម្ចាត់មេរោគ និងបាក់តេរីលើបន្លែផ្លែឈើបាន ៩៩.៩%។",
+          en: "Removes chemicals, germs, and bacteria from vegetables and fruits by 99.9%."
+        },
+        details: { kh: "១ប្រអប់ មាន ២០កញ្ចប់", en: "20 Sachets per box" },
+        technique: { kh: "ផលិតផលធម្មជាតិ ១០០%", en: "100% Natural Origin" },
+        featured: false
+      },
+      {
+        id: 8,
+        name: { kh: "សាប៊ូដុសខ្លួន អឹមប្រេស (Empress)", en: "Empress Body Wash" },
+        category: "beauty",
+        price: 4.2,
+        rating: 4.7,
+        reviewsCount: 64,
+        image: "Image/ស្ពៃ.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "សាប៊ូដុសខ្លួនផ្សំពីស្ពៃក្តោបធម្មជាតិ ជួយឱ្យស្បែកមានសំណើម ភ្លឺថ្លា និងមានក្លិនក្រអូបស្រស់ស្រាយ។",
+          en: "Body wash made from natural extracts, keeping skin moisturized, bright, and fresh."
+        },
+        details: { kh: "ចំណុះ ៨０០មីលីលីត្រ", en: "800ml Pump Bottle" },
+        technique: { kh: "ចំរាញ់ចេញពីធម្មជាតិពិតៗ", en: "Extracted from pure nature" },
+        featured: false
+      },
+      {
+        id: 9,
+        name: { kh: " GAFSP", en: "GAFSP " },
+        category: "food",
+        price: 2.8,
+        rating: 4.9,
+        reviewsCount: 210,
+        image: "Image/GAFSP.jpg",
+        origin: { kh: "ភ្នំពេញ", en: "Phnom Penh" },
+        description: {
+          kh: "អង្ករចម្ការអចិន្ត្រៃយ៍ GAFSP ផលិតដោយកសិដ្ឋានខ្មែរដែលគាំទ្រពីគម្រោងអន្តរជាតិនេះ។",
+          en: "GAFSP organic rice grown by Cambodian farms supported by this international program."
+        },
+        details: { kh: "ចំណុះ ១គីឡូក្រាម", en: "1kg Bag" },
+        technique: { kh: "កសិកម្មអ៊ិនធឺក្រាល និងគ្រប់គ្រងទឹកប្រកបដោយភាពទាន់ចិត្ត", en: "Sustainably farmed with integrated water management" },
+        featured: true
+      }
+      ,
+      {
+        id: 10,
+        name: { kh: "បំពង់ទឺកឬស្សី", en: "Bamboo Flute" },
+        category: "fashion",
+        price: 12.0,
+        rating: 4.8,
+        reviewsCount: 42,
+        image: "Image/បំពង់ទឺកឬស្សី.jpg",
+        origin: { kh: "សៀមរាប", en: "Siem Reap" },
+        description: {
+          kh: "បំពង់ឬស្សីដៃធ្វើដោយសិប្បកម្មខ្មែរ មានសម្លេងសូរិយ៉ា និងសម្រស់តាមប្រពៃណី។",
+          en: "Handmade bamboo flute crafted by Khmer artisans with traditional sound and elegant finish."
+        },
+        details: { kh: "ប្រវែង ៣៥ សង់ទីម៉ែត្រ", en: "Length: 35 cm" },
+        technique: { kh: "ដេកដោយដៃ និងបៀងសំលេងដោយបច្ចេកទេសប្រពៃណី", en: "Hand-carved and tuned with traditional techniques" },
+        featured: false
+      },
+        {
+        id: 11,
+        name: { kh: "បំពង់ទឺកឬស្សី", en: "Bamboo Flute" },
+        category: "fashion",
+        price: 12.0,
+        rating: 4.8,
+        reviewsCount: 42,
+        image: "Image/Bamboo.jpg",
+        origin: { kh: "សៀមរាប", en: "Siem Reap" },
+        description: {
+          kh: "បំពង់ឬស្សីដៃធ្វើដោយសិប្បកម្មខ្មែរ មានសម្លេងសូរិយ៉ា និងសម្រស់តាមប្រពៃណី។",
+          en: "Handmade bamboo flute crafted by Khmer artisans with traditional sound and elegant finish."
+        },
+        details: { kh: "ប្រវែង ៣៥ សង់ទីម៉ែត្រ", en: "Length: 35 cm" },
+        technique: { kh: "ដេកដោយដៃ និងបៀងសំលេងដោយបច្ចេកទេសប្រពៃណី", en: "Hand-carved and tuned with traditional techniques" },
+        featured: false
+      },
+       {
+        id: 12,
+        name: { kh: "វ៉ែនតា", en: "Glasses" },
+        category: "fashion",
+        price: 18.0,
+        rating: 4.6,
+        reviewsCount: 55,
+        image: "Image/Glasses.jpg",
+        origin: { kh: "ម៉ាដា អុបទិក សៀមរាប", en: "MADA OPTIC Siem Reap" },
+        description: {
+          kh: "វ៉ែនតាដែលធ្វើពីរបាំងដែកម៉ូដ និងមានលក្ខណៈធន់រឹង។",
+          en: "Stylish metal-frame glasses with durable lenses."
+        },
+        details: { kh: "ទំងន់ស្រាល និងសម្រួលសម្រាប់ពាក់ប្រចាំថ្ងៃ", en: "Lightweight design for everyday wear" },
+        technique: { kh: "តាមដានការដាក់ជុំដោយដៃ និងការសម្រួលប្រកបដោយភាពត្រឹមត្រូវ", en: "Hand-finished and precision assembled" },
+        featured: false
+      },
+            {
+        id: 13,
+        name: { kh: "វ៉ែនតា", en: "Glasses" },
+        category: "fashion",
+        price: 18.0,
+        rating: 4.6,
+        reviewsCount: 55,
+        image: "Image/Glasses2.jpg",
+        origin: { kh: "ម៉ាដា អុបទិក សៀមរាប", en: "MADA OPTIC Siem Reap" },
+        description: {
+          kh: "វ៉ែនតាដែលធ្វើពីរបាំងដែកម៉ូដ និងមានលក្ខណៈធន់រឹង។",
+          en: "Stylish metal-frame glasses with durable lenses."
+        },
+        details: { kh: "ទំងន់ស្រាល និងសម្រួលសម្រាប់ពាក់ប្រចាំថ្ងៃ", en: "Lightweight design for everyday wear" },
+        technique: { kh: "តាមដានការដាក់ជុំដោយដៃ និងការសម្រួលប្រកបដោយភាពត្រឹមត្រូវ", en: "Hand-finished and precision assembled" },
+        featured: false
+      },
+            {
+        id: 14,
+        name: { kh: "វ៉ែនតា", en: "Glasses" },
+        category: "fashion",
+        price: 18.0,
+        rating: 4.6,
+        reviewsCount: 55,
+        image: "Image/Glasses3.jpg",
+        origin: { kh: "ម៉ាដា អុបទិក សៀមរាប", en: "MADA OPTIC Siem Reap" },
+        description: {
+          kh: "វ៉ែនតាដែលធ្វើពីរបាំងដែកម៉ូដ និងមានលក្ខណៈធន់រឹង។",
+          en: "Stylish metal-frame glasses with durable lenses."
+        },
+        details: { kh: "ទំងន់ស្រាល និងសម្រួលសម្រាប់ពាក់ប្រចាំថ្ងៃ", en: "Lightweight design for everyday wear" },
+        technique: { kh: "តាមដានការដាក់ជុំដោយដៃ និងការសម្រួលប្រកបដោយភាពត្រឹមត្រូវ", en: "Hand-finished and precision assembled" },
+        featured: false
+      },
+            {
+        id: 15,
+        name: { kh: "វ៉ែនតា", en: "Glasses" },
+        category: "fashion",
+        price: 18.0,
+        rating: 4.6,
+        reviewsCount: 55,
+        image: "Image/Glasses4.jpg",
+        origin: { kh: "ម៉ាដា អុបទិក សៀមរាប", en: "MADA OPTIC Siem Reap" },
+        description: {
+          kh: "វ៉ែនតាដែលធ្វើពីរបាំងដែកម៉ូដ និងមានលក្ខណៈធន់រឹង។",
+          en: "Stylish metal-frame glasses with durable lenses."
+        },
+        details: { kh: "ទំងន់ស្រាល និងសម្រួលសម្រាប់ពាក់ប្រចាំថ្ងៃ", en: "Lightweight design for everyday wear" },
+        technique: { kh: "តាមដានការដាក់ជុំដោយដៃ និងការសម្រួលប្រកបដោយភាពត្រឹមត្រូវ", en: "Hand-finished and precision assembled" },
+        featured: false
+      },
+  
+       {
+        id: 16,
+        name: { kh: "កញ្ញាសេរីរ័ត្ន", en: "Idol Roth" },
+        category: "fashion",
+        price: 12.0,
+        rating: 4.8,
+        reviewsCount: 42,
+        image: "Image/Idol Roth.jpg",
+        origin: { kh: "សៀមរាប", en: "Siem Reap" },
+        description: {
+          kh: "កញ្ញាអនុប្រធាន។",
+          en: "Admin Team."
+        },
+        details: { kh: "ប្រវែង ៣៥ សង់ទីម៉ែត្រ", en: "Length: 35 cm" },
+        technique: { kh: "ដេកដោយដៃ និងបៀងសំលេងដោយបច្ចេកទេសប្រពៃណី", en: "Hand-carved and tuned with traditional techniques" },
+        featured: false
+      },
+            {
+        id: 17,
+        name: { kh: "ផលិតផលខ្មែរ", en: "handsome man" },
+        category: "fashion",
+        price: 12.0,
+        rating: 4.8,
+        reviewsCount: 42,
+        image: "Image/Tongkea.jpg",
+        origin: { kh: "សៀមរាប", en: "Siem Reap" },
+        description: {
+          kh: "គុណភាពល្អ អាចតថ្លៃបាន។",
+          en: "Good quality product that is affordable."
+        },
+        details: { kh: "ប្រវែង ៣៥ សង់ទីម៉ែត្រ", en: "Length: 35 cm" },
+        technique: { kh: "ដេកដោយដៃ និងបៀងសំលេងដោយបច្ចេកទេសប្រពៃណី", en: "Hand-carved and tuned with traditional techniques" },
+        featured: false
+      },
+       {
+        id: 18,
+        name: { kh: "ផលិតផលខ្មែរ", en: "handsome man" },
+        category: "fashion",
+        price: 12.0,
+        rating: 4.8,
+        reviewsCount: 42,
+        image: "Image/Phai.jpg",
+        origin: { kh: "សៀមរាប", en: "Siem Reap" },
+        description: {
+          kh: "គុណភាពល្អ អាចតថ្លៃបាន។",
+          en: "Good quality product that is affordable."
+        },
+        details: { kh: "ប្រវែង ៣៥ សង់ទីម៉ែត្រ", en: "Length: 35 cm" },
+        technique: { kh: "ដេកដោយដៃ និងបៀងសំលេងដោយបច្ចេកទេសប្រពៃណី", en: "Hand-carved and tuned with traditional techniques" },
+        featured: false
+      },
+       {
+        id: 18,
+        name: { kh: "បុរសស្មោះស្នោះស្នេហ៍គ្រប់ស្រី", en: "handsome man" },
+        category: "fashion",
+        price: 12.0,
+        rating: 4.8,
+        reviewsCount: 42,
+        image: "Image/Thea.jpg",
+        origin: { kh: "សៀមរាប", en: "Siem Reap" },
+        description: {
+          kh: "អ្នកធំ",
+          en: "Good quality product that is affordable."
+        },
+        details: { kh: "ប្រវែង ៣៥ សង់ទីម៉ែត្រ", en: "Length: 35 cm" },
+        technique: { kh: "ដេកដោយដៃ និងបៀងសំលេងដោយបច្ចេកទេសប្រពៃណី", en: "Hand-carved and tuned with traditional techniques" },
+        featured: false
+      },
+    ];
+
+    var INITIAL_REVIEWS = {
+      3: [
+        { author: "ឡៅ សុជាតិ", rating: 5, comment: "វ៉ែនតាស៊ុមទីតានីញ៉ូមស្រាលខ្លាំងណាស់ ពាក់ធ្វើការមិនឈឺត្រចៀកទេ ឡែនការពារភ្នែកបានយ៉ាងល្អ!", date: "2026-06-25" }
+      ]
+    };
+
+    var ADMIN_INFO = {
+      name: { kh: "ភឿន សុចិ", en: "Phoeurn Sochek" },
+      title: { kh: "អ្នកគ្រប់គ្រងប្រព័ន្ធ", en: "Founder & Application Administrator" },
+      phone: "068575334",
+      email: "phoeurn.sochen@pucsr.edu.kh",
+      telegramUsername: "@PHOEURNSOCHEK",
+      telegramLink: "https://t.me/PHOEURNSOCHEK"
+    };
+
+    function App() {
+      var cartState = useState([]);
+      var cart = cartState[0];
+      var setCart = cartState[1];
+
+      var handleAddToCart = function(product, e) {
+        if (e) e.stopPropagation();
+        setCart([...cart, product]);
+        triggerNotification(t("បានបញ្ជូល " + product.name[lang] + " ក្នុងកន្ត្រក! 🛒", "Added " + product.name[lang] + " to cart! 🛒"), "success");
+      };
+
+      var langState = useState('kh');
+      var lang = langState[0];
+      var setLang = langState[1];
+
+      var t = function(kh, en) {
+        return lang === 'kh' ? kh : en;
+      };
+
+      var productsState = useState(PRODUCTS_DATA);
+      var products = productsState[0];
+      var setProducts = productsState[1];
+
+      var searchQueryState = useState('');
+      var searchQuery = searchQueryState[0];
+      var setSearchQuery = searchQueryState[1];
+
+      var selectedCategoryState = useState('all');
+      var selectedCategory = selectedCategoryState[0];
+      var setSelectedCategory = selectedCategoryState[1];
+
+      var selectedProductState = useState(null);
+      var selectedProduct = selectedProductState[0];
+      var setSelectedProduct = selectedProductState[1];
+
+      var showSubmitModalState = useState(false);
+      var showSubmitModal = showSubmitModalState[0];
+      var setShowSubmitModal = showSubmitModalState[1];
+
+      var showCheckoutModalState = useState(false);
+      var showCheckoutModal = showCheckoutModalState[0];
+      var setShowCheckoutModal = showCheckoutModalState[1];
+
+      var showAdminModalState = useState(false);
+      var showAdminModal = showAdminModalState[0];
+      var setShowAdminModal = showAdminModalState[1];
+
+      var currentUserState = useState(null);
+      var currentUser = currentUserState[0];
+      var setCurrentUser = currentUserState[1];
+
+      var showLoginModalState = useState(false);
+      var showLoginModal = showLoginModalState[0];
+      var setShowLoginModal = showLoginModalState[1];
+
+      var loginFormState = useState({
+        username: '', password: '', fullName: '', phone: '', address: '', isRegister: false
+      });
+      var loginForm = loginFormState[0];
+      var setLoginForm = loginFormState[1];
+
+      var registeredUsersState = useState([
+        { username: 'buyer', password: '123', fullName: 'អ៊ុំ សុភ័ក្ត្រ', phone: '085443322', address: 'ភ្នំពេញ' }
+      ]);
+      var registeredUsers = registeredUsersState[0];
+      var setRegisteredUsers = registeredUsersState[1];
+
+      var newProductFormState = useState({
+        fullName: '', gender: 'male', dob: '', idCard: '', phone: '', email: '',
+        productName: '', price: '', productLocation: 'ភ្នំពេញ (Phnom Penh)', 
+        workshopLocation: '', productImage: '', descriptionKh: ''
+      });
+      var newProductForm = newProductFormState[0];
+      var setNewProductForm = newProductFormState[1];
+
+      var reviewKeywordsState = useState('');
+      var reviewKeywords = reviewKeywordsState[0];
+      var setReviewKeywords = reviewKeywordsState[1];
+
+      var reviewDraftLoadingState = useState(false);
+      var reviewDraftLoading = reviewDraftLoadingState[0];
+      var setReviewDraftLoading = reviewDraftLoadingState[1];
+
+      var productReviewsState = useState(INITIAL_REVIEWS);
+      var productReviews = productReviewsState[0];
+      var setProductReviews = productReviewsState[1];
+
+      var newReviewAuthorState = useState('');
+      var newReviewAuthor = newReviewAuthorState[0];
+      var setNewReviewAuthor = newReviewAuthorState[1];
+
+      var newReviewRatingState = useState(5);
+      var newReviewRating = newReviewRatingState[0];
+      var setNewReviewRating = newReviewRatingState[1];
+
+      var hoverReviewRatingState = useState(0); 
+      var hoverReviewRating = hoverReviewRatingState[0];
+      var setHoverReviewRating = hoverReviewRatingState[1];
+
+      var newReviewCommentState = useState('');
+      var newReviewComment = newReviewCommentState[0];
+      var setNewReviewComment = newReviewCommentState[1];
+
+      var showMenuDropdownState = useState(false);
+      var showMenuDropdown = showMenuDropdownState[0];
+      var setShowMenuDropdown = showMenuDropdownState[1];
+
+      var checkoutProductState = useState(null);
+      var checkoutProduct = checkoutProductState[0];
+      var setCheckoutProduct = checkoutProductState[1];
+
+      var customerInfoState = useState({
+        name: '', phone: '', address: '', delivery: 'phnompenh', paymentMethod: 'aba'
+      });
+      var customerInfo = customerInfoState[0];
+      var setCustomerInfo = customerInfoState[1];
+
+      var toastState = useState({ show: false, message: '', type: 'success' });
+      var toast = toastState[0];
+      var setToast = toastState[1];
+
+      // Premium Javascript smooth scroll custom timing animator function (ត្រជាក់ភ្នែក)
+      var customSmoothScroll = function(targetId) {
+        var target = document.getElementById(targetId);
+        if (!target) return;
+        var navbarOffset = 80;
+        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+        var startPosition = window.pageYOffset;
+        var distance = targetPosition - startPosition;
+        var startTime = null;
+        var duration = 950; // Soothing decelerating scroll duration (ms)
+
+        // Cubic easeInOut Easing Curve
+        var easeInOutCubic = function(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return c / 2 * t * t * t + b;
+          t -= 2;
+          return c / 2 * (t * t * t + 2) * b;
+        };
+
+        var animationStep = function(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          var timeElapsed = currentTime - startTime;
+          var run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animationStep);
+          } else {
+            window.scrollTo(0, targetPosition);
+          }
+        };
+
+        requestAnimationFrame(animationStep);
+      };
+
+      // Smooth custom scroll back to top of screen
+      var customScrollToTop = function() {
+        var startPosition = window.pageYOffset;
+        if (startPosition === 0) return;
+        var startTime = null;
+        var duration = 850;
+
+        var easeOutCubic = function(t, b, c, d) {
+          t /= d;
+          t--;
+          return c * (t * t * t + 1) + b;
+        };
+
+        var animationStep = function(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          var timeElapsed = currentTime - startTime;
+          var run = easeOutCubic(timeElapsed, startPosition, -startPosition, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animationStep);
+          } else {
+            window.scrollTo(0, 0);
+          }
+        };
+
+        requestAnimationFrame(animationStep);
+      };
+
+      // Call API for Text Generation (Review drafting)
+      var fetchAIResponse = async function(promptText, systemInstruction) {
+        var apiKey = ""; 
+        var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=" + apiKey;
+        
+        var payload = {
+          contents: [{ parts: [{ text: promptText }] }]
+        };
+        if (systemInstruction) {
+          payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+        }
+
+        var delay = 1000;
+        for (var i = 0; i < 5; i++) {
+          try {
+            var response = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (response.ok) {
+              var json = await response.json();
+              return json.candidates?.[0]?.content?.parts?.[0]?.text || '';
+            }
+          } catch (err) {}
+          await new Promise(r => setTimeout(r, delay));
+          delay *= 2;
+        }
+        throw new Error("API Connection failed after retries.");
+      };
+
+      // AI Smart review drafting assistant
+      var handleDraftReviewReview = async function() {
+        if (!reviewKeywords) {
+          triggerNotification(t("សូមបំពេញពាក្យគន្លឹះមុននឹងដំណើរការ!", "Please specify keywords before drafting!"), "info");
+          return;
+        }
+        setReviewDraftLoading(true);
+        
+        var prompt = "Draft an authentic customer product review in Khmer based on these keywords: " + reviewKeywords + 
+          " for the product: " + selectedProduct.name.kh + " (" + selectedProduct.name.en + "). Keep it natural, under 3 sentences.";
+
+        try {
+          var draft = await fetchAIResponse(prompt, "You are a helpful assistant helping Cambodians write authentic reviews.");
+          setNewReviewComment(draft.replace(/"/g, '').trim());
+          triggerNotification(t("បានបង្កើតសេចក្តីព្រាងមតិយោបល់រួចរាល់!", "Review draft prepared!"), "success");
+        } catch (e) {
+          triggerNotification(t("បរាជ័យក្នុងការទាក់ទង AI Draft Assistant!", "Failed to contact AI Draft Assistant!"), "error");
+        } finally {
+          setReviewDraftLoading(false);
+        }
+      };
+
+      // Local custom review submission
+      var handleAddReview = function(e) {
+        e.preventDefault();
+        var authorName = newReviewAuthor.trim() || (currentUser ? currentUser.fullName : t("អនាមិក", "Anonymous"));
+        if (!newReviewComment.trim()) {
+          triggerNotification(t("សូមមេត្តាបំពេញមតិយោបល់របស់អ្នកជាមុនសិន!", "Please fill in your comments first!"), "error");
+          return;
+        }
+
+        var newReview = {
+          author: authorName,
+          rating: parseInt(newReviewRating),
+          comment: newReviewComment.trim(),
+          date: new Date().toISOString().split('T')[0]
+        };
+
+        var currentProdId = selectedProduct.id;
+        var existingReviews = productReviews[currentProdId] || [];
+        var updatedReviews = [newReview].concat(existingReviews);
+
+        setProductReviews(Object.assign({}, productReviews, { [currentProdId]: updatedReviews }));
+
+        // គណនាមធ្យមភាគពិន្ទុថ្មី
+        var sum = updatedReviews.reduce((acc, cur) => acc + cur.rating, 0);
+        var avg = parseFloat((sum / updatedReviews.length).toFixed(1));
+
+        setProducts(products.map(function(p) {
+          if (p.id === currentProdId) {
+            return Object.assign({}, p, { rating: avg, reviewsCount: updatedReviews.length });
+          }
+          return p;
+        }));
+
+        setSelectedProduct(Object.assign({}, selectedProduct, { rating: avg, reviewsCount: updatedReviews.length }));
+
+        setNewReviewAuthor('');
+        setNewReviewComment('');
+        setReviewKeywords('');
+        triggerNotification(t("អរគុណសម្រាប់ការផ្តល់មតិយោបល់របស់អ្នក! 🌟", "Thank you for sharing your feedback! 🌟"), "success");
+      };
+
+      var triggerNotification = function(message, type) {
+        type = type || 'success';
+        setToast({ show: true, message: message, type: type });
+        setTimeout(function() {
+          setToast({ show: false, message: '', type: 'success' });
+        }, 3000);
+      };
+
+      var filteredProducts = useMemo(function() {
+        return products.filter(function(p) {
+          var name = p.name[lang].toLowerCase();
+          var origin = p.origin[lang].toLowerCase();
+          var matchesSearch = name.includes(searchQuery.toLowerCase()) || origin.includes(searchQuery.toLowerCase());
+          var matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+          return matchesSearch && matchesCategory;
+        });
+      }, [products, searchQuery, selectedCategory, lang]);
+
+      var handleDirectBuy = function(product) {
+        if (!currentUser) {
+          setLoginForm(Object.assign({}, loginForm, { isRegister: false }));
+          setShowLoginModal(true);
+          triggerNotification(t("សូមមេត្តាចូលគណនីរបស់អ្នកជាមុនសិនដើម្បីធានាសុវត្ថិភាពទូទាត់! 🛡️", "Please log in first to secure your checkout experience! 🛡️"), "info");
+          return;
+        }
+        setCheckoutProduct(product);
+        setShowCheckoutModal(true);
+      };
+
+      var copyProductLink = function(product, e) {
+        if (e) e.stopPropagation();
+        var mockLink = window.location.origin + "/product/" + product.id;
+        var tempInput = document.createElement('input');
+        tempInput.value = mockLink;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        triggerNotification(t('បានចម្លងតំណភ្ជាប់ផលិតផលរួចរាល់!', 'Product link copied!'), 'success');
+      };
+
+      var handleFinalCheckout = function(e) {
+        e.preventDefault();
+        if (!customerInfo.name || !customerInfo.phone || !customerInfo.address) {
+          triggerNotification(t('សូមបំពេញព័ត៌មានដែលចាំបាច់!', 'Please fill all required fields!'), 'error');
+          return;
+        }
+        if (!checkoutProduct) return;
+        
+        var deliveryCost = customerInfo.delivery === 'phnompenh' ? 1.5 : 2.5;
+        var totalCost = checkoutProduct.price + deliveryCost;
+
+        // បានកែប្រែឈ្មោះអ្នកទទួលក្នុងសារឱ្យទៅជា ភឿន សុចិ ស្របតាមការណែនាំ
+        var telegramMessage = '🔔 [ការបញ្ជាទិញថ្មី - NEW ORDER]\n\n' +
+          '👤 អតិថិជន: ' + customerInfo.name + '\n' +
+          '📞 ទូរស័ព្ទ: ' + customerInfo.phone + '\n' +
+          '📍 អាសយដ្ឋានដឹកជញ្ជូន: ' + customerInfo.address + '\n' +
+          '🚚 ប្រភេទសេវាកម្ម: ' + (customerInfo.delivery === 'phnompenh' ? 'ភ្នំពេញ ($1.5)' : 'បណ្តាខេត្ត ($2.5)') + '\n' +
+          '💳 វិធីទូទាត់: ' + customerInfo.paymentMethod.toUpperCase() + '\n\n' +
+          '📦 ផលិតផលបញ្ជាទិញ:\n• ' + checkoutProduct.name[lang] + ' (1x) - $' + checkoutProduct.price + '\n\n' +
+          '💵 សរុបសរុប: $' + totalCost + '\n\n' +
+          '👉 សូមទាក់ទងត្រលប់មកវិញតាមការគួរ!';
+          
+        var url = 'https://t.me/PHOEURNSOCHEK?text=' + encodeURIComponent(telegramMessage);
+        window.open(url, '_blank');
+        setShowCheckoutModal(false);
+        setCheckoutProduct(null);
+        triggerNotification(t('ការបញ្ជាទិញត្រូវបានបញ្ជូនទៅកាន់លោក ភឿន សុចិ!', 'Order submitted to Administrator Phoeurn Sochi!'), 'success');
+      };
+
+      var handleArtisanSubmit = function(e) {
+        e.preventDefault();
+        if (!newProductForm.fullName || !newProductForm.phone || !newProductForm.productName || !newProductForm.productLocation || !newProductForm.workshopLocation) {
+          triggerNotification(t('សូមបំពេញព័ត៌មានដែលចាំបាច់!', 'Please fill in required fields!'), 'error');
+          return;
+        }
+        
+        var added = {
+          id: Date.now(),
+          name: { kh: newProductForm.productName, en: newProductForm.productName },
+          category: 'food',
+          price: parseFloat(newProductForm.price) || 0,
+          rating: 5.0,
+          reviewsCount: 0,
+          image: newProductForm.productImage || "https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80",
+          origin: { kh: newProductForm.productLocation, en: newProductForm.productLocation },
+          description: { 
+            kh: newProductForm.descriptionKh || "ផលិតផលខ្មែរដែលមានគុណភាពល្អឯក សិប្បកម្មធ្វើដោយដៃពិតៗ។", 
+            en: "High quality authentic Cambodian product, hand-crafted beautifully." 
+          },
+          details: { kh: "ផលិតផលសហគមន៍ខ្មែរ", en: "Cambodian Community Product" },
+          technique: { kh: "ផលិតផលច្នៃដោយដៃ/កសិកម្ម", en: "Traditional / Organic methods" },
+          featured: false
+        };
+
+        setProducts([added].concat(products));
+
+        // បានកែប្រែឈ្មោះអ្នកទទួលក្នុងសារឱ្យទៅជា ភឿន សុចិ ស្របតាមការណែនាំ
+        var telegramMessage = '📤 [ការស្នើសុំចុះឈ្មោះផលិតផលថ្មី]\n\n👤 ព័ត៌មានផ្ទាល់ខ្លួនរបស់អ្នកស្នើ៖\n• ឈ្មោះ៖ ' + newProductForm.fullName + '\n• ភេទ៖ ' + (newProductForm.gender === 'male' ? 'ប្រុស' : 'ស្រី') + '\n• ថ្ងៃ ខែ ឆ្នាំកំណើត៖ ' + (newProductForm.dob || 'មិនបានបញ្ជាក់') + '\n• លេខអត្តសញ្ញាបណ្ណ៖ ' + (newProductForm.idCard || 'មិនបានបញ្ជាក់') + '\n• លេខទូរស័ព្ទ៖ ' + newProductForm.phone + '\n• អ៊ីមែល៖ ' + (newProductForm.email || 'មិនបានបញ្ជាក់') + '\n\n📦 ព័ត៌មានផលិតផលខ្មែរ៖\n• ឈ្មោះផលិតផល៖ ' + newProductForm.productName + '\n• ទីតាំងផលិតផល៖ ' + newProductForm.productLocation + '\n• ទីតាំងសិប្បកម្ម/ផលិតផល៖ ' + newProductForm.workshopLocation + '\n' +
+          '• តម្លៃលក់៖ $' + newProductForm.price + '\n' +
+          '• ពិពណ៌នា៖ ' + (newProductForm.descriptionKh || 'គ្មាន') + '\n\n' +
+          '📢 សូមប្រព័ន្ធគ្រប់គ្រងត្រួតពិនិត្យ និងអនុម័តសិប្បកម្មនេះ!';
+
+        var url = 'https://t.me/PHOEURNSOCHEK?text=' + encodeURIComponent(telegramMessage);
+        window.open(url, '_blank');
+        setShowSubmitModal(false);
+        triggerNotification(t('បានបញ្ជូនការស្នើសុំចុះឈ្មោះផលិតផលទៅកាន់លោក ភឿន សុចិ!', 'Product registration request submitted to Phoeurn Sochi!'), 'success');
+      };
+
+      var handleUserAccess = function(e) {
+        e.preventDefault();
+        if (loginForm.isRegister) {
+          if (!loginForm.username || !loginForm.password || !loginForm.fullName || !loginForm.phone) {
+            triggerNotification(t('សូមបំពេញរាល់ព័ត៌មានចាំបាច់ដើម្បីចុះឈ្មោះ!', 'Please complete all required fields!'), 'error');
+            return;
+          }
+          var exist = registeredUsers.find(u => u.username === loginForm.username);
+          if (exist) {
+            triggerNotification(t('ឈ្មោះគណនីនេះត្រូវបានប្រើប្រាស់រួចហើយ!', 'Username already taken!'), 'error');
+            return;
+          }
+          var newUser = {
+            username: loginForm.username,
+            password: loginForm.password,
+            fullName: loginForm.fullName,
+            phone: loginForm.phone,
+            address: loginForm.address || 'Cambodia'
+          };
+          setRegisteredUsers([...registeredUsers, newUser]);
+          setCurrentUser(newUser);
+          setShowLoginModal(false);
+          triggerNotification(t('ចុះឈ្មោះនិងចូលប្រើប្រាស់ជោគជ័យ! 🎉', 'Registered and logged in successfully! 🎉'), 'success');
+        } else {
+          var found = registeredUsers.find(u => u.username === loginForm.username && u.password === loginForm.password);
+          if (found) {
+            setCurrentUser(found);
+            setShowLoginModal(false);
+            triggerNotification(t('ស្វាគមន៍ការត្រលប់មកវិញ! 👋', 'Welcome back! 👋'), 'success');
+          } else {
+            triggerNotification(t('ឈ្មោះគណនី ឬលេខសម្ងាត់មិនត្រឹមត្រូវឡើយ!', 'Invalid username or password!'), 'error');
+          }
+        }
+      };
+
+      var updateLoginForm = function(field, value) {
+        setLoginForm(Object.assign({}, loginForm, { [field]: value }));
+      };
+
+      var updateNewProductForm = function(field, value) {
+        setNewProductForm(Object.assign({}, newProductForm, { [field]: value }));
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col bg-[#FAF7F2] pb-24 md:pb-0">
+          
+          {/* Notification Toast Component */}
+          {toast.show && (
+            <div className="fixed top-6 right-6 z-[9999] animate-bounce max-w-sm w-full bg-stone-900 text-stone-100 px-4 py-3 rounded-xl shadow-2xl flex items-center justify-between border border-amber-500/30">
+              <span className="text-sm font-semibold">{toast.message}</span>
+              <button onClick={() => setToast({ show: false, message: '', type: 'success' })} className="text-amber-500 hover:text-white ml-2">
+                <Icons.X />
+              </button>
+            </div>
+          )}
+
+          {/* Premium Khmer Header Navbar */}
+          <header className="sticky top-0 z-50 bg-khmerMaroon text-white shadow-xl border-b-2 border-amber-600/50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+              
+              {/* Logo / Brand Name - Updated Application Title */}
+              <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => { setSelectedProduct(null); customScrollToTop(); }}>
+                <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center font-bold text-khmerMaroon text-xl shadow-lg border border-amber-200 transition-transform duration-700 group-hover:rotate-12">
+                  🌾
+                </div>
+                <div className="min-w-0">
+                  <h1 className="moul-font text-xs sm:text-base text-amber-400 tracking-wide transition-colors duration-300 group-hover:text-amber-300 truncate">ផ្សារអនឡាញផលិតផលខ្មែរ</h1>
+                  <p className="text-[9px] sm:text-[10px] tracking-widest text-stone-300 uppercase font-bold truncate">Khmer Artisan E-Market</p>
+                </div>
+              </div>
+
+              {/* Navigation Links for Desktop Only */}
+              <div className="hidden md:flex items-center space-x-8">
+                <button 
+                  onClick={() => { setSelectedProduct(null); customScrollToTop(); }} 
+                  className="text-stone-200 hover:text-amber-400 font-bold transition-all duration-500 text-sm py-1.5 relative group select-none"
+                >
+                  {t("ទំព័រដើម", "Home")}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-500 group-hover:w-full"></span>
+                </button>
+
+                <button 
+                  onClick={() => {
+                    setSelectedProduct(null);
+                    setTimeout(() => {
+                      var target = document.getElementById('catalog-section');
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }} 
+                  className="text-stone-200 hover:text-amber-400 font-bold transition-all duration-500 text-sm py-1.5 relative group select-none"
+                >
+                  {t("ផលិតផល", "Products")}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-500 group-hover:w-full"></span>
+                </button>
+
+                <button 
+                  onClick={() => setShowAdminModal(true)} 
+                  className="text-stone-200 hover:text-amber-400 font-bold transition-all duration-500 text-sm py-1.5 relative group select-none"
+                >
+                  {t("អំពីយើង", "About Us")}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-500 group-hover:w-full"></span>
+                </button>
+
+                {/* Authentication Gate */}
+                {currentUser ? (
+                  <div className="flex items-center space-x-3 pl-4 border-l border-white/20 select-none">
+                    <div className="w-8 h-8 bg-stone-700 rounded-full flex items-center justify-center border border-amber-500/40 text-sm transition-transform duration-300 hover:scale-110">
+                      👤
+                    </div>
+                    <div className="text-left">
+                      <p className="text-xs font-semibold text-white">{currentUser.fullName}</p>
+                      <button onClick={() => { setCurrentUser(null); triggerNotification(t("ចាកចេញពីគណនីរួចរាល់!", "Successfully logged out!"), "info"); }} className="text-[10px] text-amber-400 hover:underline">
+                        {t("ចាកចេញ", "Logout")}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button 
+                    onClick={() => { setLoginForm({ ...loginForm, isRegister: false }); setShowLoginModal(true); }}
+                    className="flex items-center gap-1.5 border border-white/30 hover:border-amber-400 px-4 py-2.5 rounded-xl text-xs hover:text-amber-400 transition-all duration-500 hover:shadow-lg hover:shadow-amber-500/10 active:scale-95 select-none"
+                  >
+                    <Icons.User />
+                    {t("ចូលគណនី", "Login")}
+                    
+                  </button>
+                )}
+                <div className="relative mr-2 cursor-pointer group">
+                  <div className="p-2.5 bg-stone-800 rounded-xl text-amber-400 border border-white/10 group-hover:border-amber-500 transition-all">
+                    <Icons.ShoppingCart />
+                  </div>
+                  {cart.length > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold animate-pulse shadow-lg">
+                      {cart.length}
+                    </span>
+                  )}
+                </div>
+
+                {/* Local Switch Language Controls */}
+                <button 
+                  onClick={() => setLang(lang === 'kh' ? 'en' : 'kh')} 
+                  className="bg-stone-800 border border-amber-600/30 text-amber-400 text-xs px-3 py-2.5 rounded-xl hover:bg-stone-700 transition-all duration-500 flex items-center gap-1.5 active:scale-95 select-none"
+                >
+                  <Icons.Globe />
+                  {lang === 'kh' ? 'English' : 'ខ្មែរ'}
+                </button>
+              </div>
+
+              {/* Simplified Mobile Header Actions */}
+              <div className="flex md:hidden items-center space-x-2 select-none">
+                <button 
+                  onClick={() => setLang(lang === 'kh' ? 'en' : 'kh')} 
+                  className="text-amber-400 text-[11px] bg-stone-800 px-3 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-white/5"
+                >
+                  {lang === 'kh' ? 'EN' : 'KH'}
+                </button>
+
+                {currentUser ? (
+                  <button 
+                    onClick={() => { setCurrentUser(null); triggerNotification(t("ចាកចេញពីគណនីរួចរាល់!", "Successfully logged out!"), "info"); }}
+                    className="bg-stone-800 text-amber-400 text-[11px] px-3 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-white/5"
+                  >
+                    {t("ចាកចេញ", "Logout")}
+                  </button>
+                ) : (
+                  <button 
+                    onClick={() => { setLoginForm({ ...loginForm, isRegister: false }); setShowLoginModal(true); }}
+                    className="bg-stone-800 text-amber-400 text-[11px] px-3 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-white/5 flex items-center gap-1.5"
+                  >
+                    <Icons.User />
+                    {t("ចូល", "Login")}
+                  </button>
+                )}
+              </div>
+
+            </div>
+          </header>
+
+          {/* Hero Welcoming Banner Area with beautiful Angkor motifs pattern */}
+          <section className="bg-gradient-to-r from-khmerMaroon via-khmerMaroonLight to-khmerMaroon text-white py-12 sm:py-16 px-4 text-center relative overflow-hidden border-b-4 border-amber-500/80">
+            {/* Soothing Golden Particle Layer */}
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            
+            {/* Smooth animated slow panning background pattern */}
+            <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#d4af37_1.5px,transparent_1.5px)] [background-size:20px_20px] animate-slow-pan"></div>
+            <div className="max-w-4xl mx-auto relative z-10 space-y-5 sm:space-y-6 animate-scale-up">
+              <span className="text-amber-400 uppercase tracking-widest text-[10px] sm:text-[11px] font-bold bg-amber-500/10 px-3 sm:px-4 py-1.5 rounded-full border border-amber-500/20 shadow-inner">
+                {t("សិប្បកម្ម និងកសិផលខ្មែរពិតៗ ១០០%", "100% Authentic Khmer Crafts & Agri-Goods")}
+              </span>
+              
+              {/* Updated main banner heading: Split into 2 beautifully separated, soothing lines (គម្លាតរលូនត្រជាក់ភ្នែក) */}
+              <h2 className="moul-font text-xl sm:text-4xl lg:text-5xl text-amber-300 drop-shadow-xl flex flex-col gap-3 sm:gap-6 leading-snug">
+                <span className="tracking-wide">{t("គាំទ្រផលិតផលជាតិ", "Support National Products")}</span>
+                <span className="text-amber-400/90 text-lg sm:text-3xl lg:text-4xl font-normal tracking-wide">{t("លើកស្ទួយសេដ្ឋកិច្ចគ្រួសារ", "Promote Family Economy")}</span>
+              </h2>
+              
+              {/* បានកែសម្រួលឃ្លាពិពណ៌នានៅទីនេះស្របតាមការណែនាំយ៉ាងល្អឥតខ្ចោះ */}
+              <p className="text-stone-300 max-w-2xl mx-auto text-xs sm:text-base leading-relaxed font-light px-2">
+                {t(
+                  "ផ្សារភ្ជាប់លោកអ្នកជាមួយនិងផលិតផលខ្មែរយ៉ាងច្រើនសម្បូរបែប",
+                  "Connecting you with a rich variety of Khmer products."
+                )}
+              </p>
+              
+              <div className="pt-2 hidden sm:flex flex-col sm:flex-row justify-center gap-3 max-w-xs sm:max-w-none mx-auto select-none">
+                <button 
+                  onClick={() => setShowSubmitModal(true)} 
+                  className="bg-amber-500 hover:bg-amber-600 text-stone-900 px-8 py-4 rounded-xl font-bold text-sm shadow-lg shadow-amber-900/40 transition-all duration-500 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 w-full sm:w-auto"
+                >
+                  {t("ចាប់ផ្តើមលក់ក្នុងប្រព័ន្ធ", "Join as Community Artisan")}
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* Main Workspace Layout Container */}
+          <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+            
+            {/* If a product detail is selected, focus on rendering details */}
+            {selectedProduct ? (
+              <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden border border-stone-200/60 animate-scale-up">
+                
+                {/* Product details top navigator back panel */}
+                <div className="bg-stone-50 border-b border-stone-200/80 px-4 sm:px-6 py-4 flex items-center justify-between select-none">
+                  <button 
+                    onClick={() => { setSelectedProduct(null); customScrollToTop(); }} 
+                    className="flex items-center gap-2 text-stone-600 hover:text-amber-800 transition-all duration-300 text-sm font-semibold group py-2"
+                  >
+                    <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
+                    <span>{t("ត្រឡប់ទៅកាន់ទំព័រដើម", "Back to Home")}</span>
+                  </button>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={(e) => copyProductLink(selectedProduct, e)}
+                      className="p-3 text-stone-500 hover:text-stone-855 hover:bg-stone-100 bg-white border border-stone-200 rounded-xl transition-all duration-300 active:scale-90"
+                      title={t("ចែករំលែកផលិតផល", "Share Product")}
+                    >
+                      <Icons.Share2 />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Core Detailed product split layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 sm:p-6 lg:p-10">
+                  
+                  {/* Left Column product media showcase */}
+                  <div className="space-y-4">
+                    <div className="relative rounded-2xl overflow-hidden bg-stone-100 aspect-square group shadow-md border border-stone-200/50">
+                      <img 
+                        src={selectedProduct.image} 
+                        alt={selectedProduct.name[lang]} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
+                      />
+                      <span className="absolute top-4 left-4 bg-amber-500 text-stone-900 text-xs px-3 py-1 rounded-full font-bold shadow">
+                        ★ {selectedProduct.rating}
+                      </span>
+                      <span className="absolute bottom-4 left-4 bg-khmerMaroon/90 text-white text-xs px-3 py-1 rounded-full flex items-center gap-1">
+                        <Icons.MapPin />
+                        {selectedProduct.origin[lang]}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column details text data */}
+                  <div className="space-y-6 flex flex-col justify-between">
+                    <div>
+                      <h2 className="moul-font text-lg sm:text-2xl text-khmerMaroon leading-relaxed">{selectedProduct.name[lang]}</h2>
+                      
+                      <div className="flex items-center space-x-2 mt-2">
+                        <div className="flex">
+                          {[1, 2, 3, 4, 5].map(star => (
+                            <Icons.Star key={star} filled={star <= Math.round(selectedProduct.rating)} />
+                          ))}
+                        </div>
+                        <span className="text-stone-500 text-xs">({selectedProduct.reviewsCount} {t("មតិយោបល់", "reviews")})</span>
+                      </div>
+
+                      <div className="my-4 p-3 bg-stone-50 rounded-xl border border-stone-200/50 inline-block transition-transform duration-500 hover:scale-105">
+                        <span className="text-2xl sm:text-3xl font-extrabold text-amber-600">${selectedProduct.price}</span>
+                        <span className="text-xs text-stone-500 ml-1">/ {t("ឯកតា", "unit")}</span>
+                      </div>
+
+                      {/* Content panel displaying product info directly (លុបប្រព័ន្ធផ្ទាំងរឿងរ៉ាវ AI ចេញតាមតម្រូវការ) */}
+                      <div className="py-4 text-xs sm:text-sm text-stone-600 leading-relaxed space-y-3 transition-all duration-500 border-t border-stone-100">
+                        <div className="animate-fade-in-up">
+                          <p className="text-stone-700 text-sm sm:text-base leading-relaxed mb-4">{selectedProduct.description[lang]}</p>
+                          <div className="bg-stone-50 p-4 rounded-xl space-y-2.5 text-xs border border-stone-200/40 mt-3">
+                            <p><strong>{t("លក្ខណៈបច្ចេកទេស៖", "Specifications:")}</strong> {selectedProduct.details[lang]}</p>
+                            <p><strong>{t("របៀបច្នៃប្រឌិត៖", "Crafting Technique:")}</strong> {selectedProduct.technique[lang]}</p>
+                            <p><strong>{t("ទីតាំងហាង៖", "Store Location:")}</strong> {selectedProduct.origin[lang]}</p> {/* បានប្តូរពី ទីកន្លែងដើម ទៅជា ទីតាំងហាង តាមការណែនាំ */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Footer call to actions - បានលុបឃ្លាដឹកជញ្ជូន និងធានាសងប្រាក់ចេញតាមការណែនាំយ៉ាងស្អាត */}
+                    <div className="pt-6 border-t border-stone-100 select-none flex flex-col sm:flex-row gap-3">
+                      <button 
+                        onClick={() => handleAddToCart(selectedProduct)}
+                        className="flex-1 border-2 border-amber-500 text-amber-700 font-bold py-3.5 rounded-xl transition-all duration-500 hover:bg-amber-50 active:scale-95 text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                      >
+                        <Icons.ShoppingCart /> {t("បញ្ជូលកន្ត្រក", "Add to Cart")}
+                      </button>
+                      <button 
+                        onClick={() => handleDirectBuy(selectedProduct)}
+                        className="flex-[2] bg-khmerMaroon hover:bg-khmerMaroonLight text-white font-bold py-3.5 rounded-xl transition-all duration-500 shadow-md hover:shadow-xl hover:scale-[1.01] active:scale-99 text-sm uppercase tracking-wider flex items-center justify-center gap-2"
+                      >
+                        🛍️ {t("បញ្ជាទិញភ្លាមៗ", "Buy Now")}
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Bottom Reviews / Feedback Interface Area */}
+                <div className="bg-stone-50 border-t border-stone-200/80 p-4 sm:p-6 lg:p-10">
+                  <h3 className="moul-font text-base sm:text-lg text-khmerMaroon mb-6">{t("មតិយោបល់ និងការវាយតម្លៃរបស់អ្នកប្រើប្រាស់", "Customer Feedback & Reviews")}</h3>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    {/* Write new feedback rating form */}
+                    <div className="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200/60 shadow-sm space-y-4">
+                      <h4 className="font-bold text-stone-850 text-sm">{t("ចែករំលែកមតិយោបល់របស់អ្នក", "Write an Authentic Review")}</h4>
+                      
+                      {/* Optional AI helper box */}
+                      <div className="bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/20 space-y-2 transition-all duration-500 hover:bg-amber-500/15">
+                        <label className="text-[10px] font-bold text-amber-800 block select-none">{t("✨ ជំនួយនិពន្ធមតិយោបល់ដោយ AI", "✨ AI Smart Review Drafting Assistant")}</label>
+                        <input 
+                          type="text" 
+                          placeholder={t("ឧទាហរណ៍៖ ក្រអូប, គុណភាពខ្ពស់, ដឹកលឿន...", "e.g., aromatic, high quality, authentic...")}
+                          value={reviewKeywords}
+                          onChange={(e) => setReviewKeywords(e.target.value)}
+                          className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                        />
+                        <button 
+                          type="button" 
+                          onClick={handleDraftReviewReview}
+                          disabled={reviewDraftLoading}
+                          className="w-full bg-amber-500 hover:bg-amber-600 text-khmerMaroon font-bold py-2.5 sm:py-2 rounded-xl text-xs sm:text-[10px] transition-all duration-300 active:scale-95 flex items-center justify-center gap-1 shadow-sm select-none"
+                        >
+                          {reviewDraftLoading ? <Icons.Loader2 /> : <Icons.Bot />}
+                          {t("បង្កើតសេចក្តីព្រាង", "Draft with AI")}
+                        </button>
+                      </div>
+
+                      <form onSubmit={handleAddReview} className="space-y-3.5">
+                        <div>
+                          <label className="text-xs text-stone-500 block mb-1">{t("ឈ្មោះរបស់អ្នក", "Your Name")}</label>
+                          <input 
+                            type="text" 
+                            placeholder={currentUser ? currentUser.fullName : t("បំពេញឈ្មោះរបស់អ្នក", "Your Name")}
+                            value={newReviewAuthor}
+                            onChange={(e) => setNewReviewAuthor(e.target.value)}
+                            className="w-full text-base sm:text-xs border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none focus:border-amber-500"
+                          />
+                        </div>
+
+                        {/* Beautiful Javascript interactive star rating input */}
+                        <div>
+                          <label className="text-xs text-stone-500 block mb-1 select-none">{t("កម្រិតវាយតម្លៃ (ផ្កាយ)", "Rating Level (Stars)")}</label>
+                          <div className="flex items-center space-x-2 py-2 select-none">
+                            {[1, 2, 3, 4, 5].map(starNum => (
+                              <Icons.Star 
+                                key={starNum} 
+                                filled={hoverReviewRating ? (starNum <= hoverReviewRating) : (starNum <= newReviewRating)} 
+                                onMouseEnter={function() { setHoverReviewRating(starNum); }}
+                                onMouseLeave={function() { setHoverReviewRating(0); }}
+                                onClick={function() { setNewReviewRating(starNum); }}
+                              />
+                            ))}
+                            <span className="text-xs font-bold text-amber-600 ml-2">
+                              {hoverReviewRating ? hoverReviewRating : newReviewRating} / 5
+                            </span>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="text-xs text-stone-500 block mb-1">{t("មតិយោបល់លម្អិត", "Review Comments")}</label>
+                          <textarea 
+                            rows="3" 
+                            placeholder={t("សរសេរមតិរបស់អ្នកនៅទីនេះ...", "Type review comments here...")}
+                            value={newReviewComment}
+                            onChange={(e) => setNewReviewComment(e.target.value)}
+                            className="w-full text-base sm:text-xs border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none focus:border-amber-500"
+                          ></textarea>
+                        </div>
+
+                        <button 
+                          type="submit" 
+                          className="w-full bg-stone-950 hover:bg-stone-850 text-white font-bold py-3 sm:py-2.5 rounded-xl transition-all duration-300 hover:shadow-md active:scale-95 select-none"
+                        >
+                          {t("បញ្ជូនមតិយោបល់", "Publish Review")}
+                        </button>
+                      </form>
+                    </div>
+
+                    {/* Active Reviews listing list stream */}
+                    <div className="lg:col-span-2 space-y-4 max-h-[480px] overflow-y-auto no-scrollbar">
+                      {(productReviews[selectedProduct.id] || []).length > 0 ? (
+                        (productReviews[selectedProduct.id] || []).map((rev, index) => (
+                          <div key={index} className="bg-white p-4 rounded-xl border border-stone-200/60 shadow-sm space-y-2 hover-scale">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-bold text-stone-800">{rev.author}</span>
+                              <span className="text-[10px] text-stone-400">{rev.date}</span>
+                            </div>
+                            <div className="flex">
+                              {[1, 2, 3, 4, 5].map(star => (
+                                <Icons.Star key={star} filled={star <= rev.rating} />
+                              ))}
+                            </div>
+                            <p className="text-xs sm:text-sm text-stone-600 italic">"{rev.comment}"</p>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center py-12 text-stone-400 bg-white rounded-xl border border-dashed border-stone-300">
+                          <p>{t("មិនទាន់មានមតិយោបល់នៅឡើយទេ! ក្លាយជាអ្នកដំបូងដើម្បីផ្តល់មតិយោបល់។", "No reviews published yet! Be the first to express opinion.")}</p>
+                        </div>
+                      )}
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            ) : (
+              // Otherwise render full search filter list with clean UX layout grid
+              <div className="space-y-8 animate-fade-in-up">
+                
+                {/* Search controller bar & categories navigator - 🌟 បានលុបចោល Max Price Slider យ៉ាងស្អាត និងធូរភ្នែកបំផុត */}
+                <div className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-stone-200/60 shadow-md space-y-4">
+                  
+                  {/* Search input row */}
+                  <div className="w-full">
+                    {/* Search string parameter inputs (ពង្រីកពេញទទឹងយ៉ាងស្រស់ស្អាត) */}
+                    <div className="relative w-full">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400">
+                        <Icons.Search />
+                      </span>
+                      <input 
+                        type="text" 
+                        placeholder={t("ស្វែងរកឈ្មោះ ឬទីតាំងហាងផលិតផល...", "Search store locations or product names...")}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-stone-50 border border-stone-200 rounded-xl py-3.5 pl-10 pr-4 text-base sm:text-xs focus:outline-none focus:border-amber-500 focus:bg-white transition-all duration-300"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Horizontal Category selections wrapper */}
+                  <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar pt-2 border-t border-stone-100 snap-x">
+                    {CATEGORIES.map(cat => (
+                      <button 
+                        key={cat.id}
+                        onClick={() => setSelectedCategory(cat.id)}
+                        className={`px-5 py-3 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all duration-300 whitespace-nowrap flex items-center gap-1.5 active:scale-95 border snap-start select-none ${selectedCategory === cat.id ? 'bg-khmerMaroon text-white border-amber-500 shadow-md shadow-amber-900/10' : 'bg-stone-50 text-stone-600 hover:bg-stone-100 border-stone-200/50'}`}
+                      >
+                        <span>{cat.icon}</span>
+                        <span>{cat.name[lang]}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                </div>
+
+                {/* Handcrafted Products Grid Stream */}
+                <div>
+                  <h3 id="catalog-section" className="moul-font text-base sm:text-lg text-khmerMaroon mb-6 flex items-center gap-2 scroll-mt-24">
+                    🌾 {t("បញ្ជីសិប្បកម្ម និងផលិតផលសហគមន៍ខ្មែរ", "Cambodian Community Handicrafts Catalogue")}
+                  </h3>
+
+                  {filteredProducts.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {filteredProducts.map(function(product, index) {
+                        return (
+                          <div 
+                            key={product.id}
+                            onClick={() => { setSelectedProduct(product); customScrollToTop(); }}
+                            className="bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-md border border-stone-200/60 hover-scale cursor-pointer flex flex-col justify-between animate-fade-in-up shimmer-container"
+                            style={{ animationDelay: (index * 80) + 'ms' }}
+                          >
+                            <div className="relative bg-stone-100 aspect-[4/3] w-full overflow-hidden">
+                              <img 
+                                src={product.image} 
+                                alt={product.name[lang]} 
+                                className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                              />
+                              <span className="absolute top-3 left-3 bg-amber-500 text-stone-900 text-[10px] px-2.5 py-1 rounded-full font-bold shadow-md">
+                                ★ {product.rating}
+                              </span>
+                              <span className="absolute bottom-3 left-3 bg-stone-900/80 text-white text-[10px] px-2 py-1 rounded-md flex items-center gap-1">
+                                <Icons.MapPin />
+                                {product.origin[lang]}
+                              </span>
+                            </div>
+
+                            <div className="p-4 space-y-3 flex-grow flex flex-col justify-between">
+                              <div>
+                                <h4 className="font-bold text-stone-855 text-sm sm:text-base line-clamp-1">{product.name[lang]}</h4>
+                                <p className="text-xs text-stone-500 line-clamp-2 mt-1">{product.description[lang]}</p>
+                              </div>
+
+                              <div class="flex gap-2">
+                                <button 
+                                  onClick={(e) => handleAddToCart(product, e)}
+                                  class="bg-amber-500 hover:bg-amber-600 text-khmerMaroon p-3 rounded-xl transition-all duration-300 active:scale-95 shadow-md"
+                                  title={t("បញ្ជូលកន្ត្រក", "Add to Cart")}
+                                >
+                                  <Icons.ShoppingCart />
+                                </button>
+                                <button 
+                                  onClick={e => { e.stopPropagation(); handleDirectBuy(product); }}
+                                  className="flex-grow bg-stone-900 hover:bg-stone-850 text-white text-xs font-bold px-4 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-black/20 active:scale-95"
+                                >
+                                  {t("បញ្ជាទិញ", "Buy Now")}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="text-center py-24 bg-white rounded-3xl border-2 border-dashed border-stone-300 animate-scale-up">
+                      <div className="text-4xl mb-2 animate-bounce">🌾</div>
+                      <p className="text-stone-500 text-sm">{t("មិនមានផលិតផលដែលផ្គូផ្គងការស្វែងរករបស់អ្នកឡើយ!", "No handicrafts found matching your parameters!")}</p>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            )}
+
+          </main>
+
+          {/* Core Footer Info Panels */}
+          <footer className="bg-khmerMaroon text-white pt-12 pb-6 border-t-2 border-amber-500/50 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10 relative z-10">
+              
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-lg">
+                    🌾
+                  </div>
+                  <h3 className="moul-font text-base text-amber-400">{t("សហគមន៍ផ្សារអនឡាញផលិតផលខ្មែរ", "Khmer Artisan E-Market")}</h3>
+                </div>
+                <p className="text-xs text-stone-300 leading-relaxed">
+                  {t(
+                    "បេសកកម្មរបស់យើងគឺជំរុញ និងលើកកម្ពស់សិប្បកម្ម សម្បត្តិវប្បធម៌ និងផលិតផលសរីរាង្គក្នុងស្រុក ទៅកាន់ពិភពលោក។",
+                    "We are dedicated to supporting independent Cambodian weavers, farmers, and family workshops across the countryside."
+                  )}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="font-bold text-amber-400 text-sm">{t("តំណភ្ជាប់សំខាន់ៗ", "System Directory")}</h4>
+                <ul className="text-xs text-stone-300 space-y-2.5">
+                  <li>
+                    <button onClick={() => { setSelectedProduct(null); customScrollToTop(); }} className="hover:text-amber-400 transition-all text-left">
+                      🏡 {t("ទំព័រដើម", "Home")}
+                    </button>
+                  </li>
+                  <li>
+                    <button 
+                      onClick={() => {
+                        setSelectedProduct(null);
+                        setTimeout(() => {
+                          document.getElementById('catalog-section')?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      }} 
+                      className="hover:text-amber-400 transition-all text-left"
+                    >
+                      📦 {t("ផលិតផលសហគមន៍", "Products Catalogue")}
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => setShowAdminModal(true)} className="hover:text-amber-400 transition-all text-left">
+                      ℹ️ {t("អំពីយើង និងទំនាក់ទំនង", "About Us & Contact")}
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => setShowSubmitModal(true)} className="hover:text-amber-400 transition-all text-left">
+                      📤 {t("ចុះឈ្មោះផលិតផលថ្មី", "Artisan Registry Upload")}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="font-bold text-amber-400 text-sm">{t("ព័ត៌មានអ្នកគ្រប់គ្រង", "Founder Contact")}</h4>
+                <p className="text-xs text-stone-300">
+                  <strong>{t("ឈ្មោះ៖", "Name:")}</strong> {ADMIN_INFO.name[lang]} <br />
+                  <strong>{t("តួនាទី៖", "Title:")}</strong> {ADMIN_INFO.title[lang]} <br />
+                  <strong>{t("ទូរស័ព្ទ៖", "Phone:")}</strong> {ADMIN_INFO.phone} <br />
+                  <strong>{t("អ៊ីមែល៖", "Email:")}</strong> {ADMIN_INFO.email}
+                </p>
+                <a 
+                  href={ADMIN_INFO.telegramLink} 
+                  target="_blank" 
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-lg text-xs transition-all duration-300 hover:scale-105 active:scale-95"
+                >
+                  📨 Telegram Connect
+                </a>
+              </div>
+
+            </div>
+
+            <p className="text-center text-stone-400 text-[10px] pt-6 relative z-10">
+              © 2026 សហគមន៍ផ្សារអនឡាញផលិតផលខ្មែរ (Khmer Artisan E-Market). Created with cultural devotion.
+            </p>
+          </footer>
+
+          {/* 🌟 របាររុករកទូរស័ព្ទដៃដ៏ប្រណីតនៅផ្នែកខាងក្រោម (Premium Mobile Bottom Navigation Bar) - គម្លាត ប៊ូតុង និង Touch Targets ត្រូវបានកែសម្រួលយ៉ាងល្អឥតខ្ចោះសម្រាប់ទូរស័ព្ទដៃ */}
+          <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#2E0B11]/95 backdrop-blur-lg border-t border-amber-500/20 py-3 px-3 md:hidden flex items-center justify-around shadow-[0_-8px_30px_rgba(46,11,17,0.2)] pb-[calc(env(safe-area-inset-bottom)+12px)] transition-all duration-300 select-none">
+            <button 
+              onClick={() => { setSelectedProduct(null); customScrollToTop(); }}
+              className={`flex flex-col items-center justify-center gap-1.5 flex-1 text-center transition-all py-1.5 active:scale-90 ${!selectedProduct ? 'text-amber-400' : 'text-stone-400 hover:text-amber-400'}`}
+            >
+              <span className="text-xl">🏡</span>
+              <span className="text-[11px] font-bold tracking-wide">{t("ទំព័រដើម", "Home")}</span>
+            </button>
+
+            <button 
+              onClick={() => {
+                setSelectedProduct(null);
+                setTimeout(() => {
+                  customSmoothScroll('catalog-section');
+                }, 100);
+              }}
+              className="flex flex-col items-center justify-center gap-1.5 flex-1 text-center py-1.5 text-stone-400 hover:text-amber-400 transition-all active:scale-90"
+            >
+              <span className="text-xl">📦</span>
+              <span className="text-[11px] font-bold tracking-wide">{t("ផលិតផល", "Products")}</span>
+            </button>
+
+            <button 
+              onClick={() => setShowSubmitModal(true)}
+              className="flex flex-col items-center justify-center gap-1.5 flex-1 text-center py-1.5 text-stone-400 hover:text-amber-400 transition-all active:scale-90"
+            >
+              <span className="text-xl">📤</span>
+              <span className="text-[11px] font-bold tracking-wide">{t("ចុះឈ្មោះ", "Register")}</span>
+            </button>
+
+            <button 
+              onClick={() => setShowAdminModal(true)}
+              className="flex flex-col items-center justify-center gap-1.5 flex-1 text-center py-1.5 text-stone-400 hover:text-amber-400 transition-all active:scale-90"
+            >
+              <span className="text-xl">ℹ️</span>
+              <span className="text-[11px] font-bold tracking-wide">{t("អំពីយើង", "About us")}</span>
+            </button>
+          </div>
+
+          {/* Handcrafted Registry Submission Upload Form Modal */}
+          {showSubmitModal && (
+            <div className="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-4 bg-stone-900/85 overflow-y-auto backdrop-blur-sm">
+              <div className="bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-amber-500/30 animate-scale-up">
+                
+                <div className="bg-khmerMaroon text-white p-4.5 sm:p-5 flex items-center justify-between border-b border-amber-600/30 select-none">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">📤</span>
+                    <div>
+                      <h3 className="font-bold text-amber-400 text-sm">{t("ចុះឈ្មោះផលិតផល និងសិប្បកម្មថ្មី", "Artisan Registry Upload Request")}</h3>
+                      <p className="text-[10px] text-stone-300">{t("បំពេញព័ត៌មានរបស់អ្នកដើម្បីដាក់លក់ក្នុងសហគមន៍", "Apply for verified listing in the community catalog")}</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setShowSubmitModal(false)} className="text-stone-300 hover:text-white transition-transform active:scale-90 p-2 -mr-2">
+                    <Icons.X />
+                  </button>
+                </div>
+
+                <form onSubmit={handleArtisanSubmit} className="p-4 sm:p-6 space-y-4 max-h-[72vh] overflow-y-auto no-scrollbar">
+                  
+                  <div className="border-b border-stone-100 pb-2">
+                    <h4 className="font-bold text-stone-800 text-xs uppercase tracking-wider text-amber-700">១. ព័ត៌មានផ្ទាល់ខ្លួនរបស់អ្នកសិប្បករ (Artisan Personal Bio)</h4>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("ឈ្មោះពេញរបស់សិប្បករ *", "Artisan Full Name *")}</label>
+                      <input 
+                        type="text" 
+                        required
+                        value={newProductForm.fullName}
+                        onChange={(e) => updateNewProductForm('fullName', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none focus:border-amber-500 focus:bg-white transition-all"
+                        placeholder={t("បំពេញឈ្មោះពេញរបស់អ្នក", "e.g., Sok San")}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("ភេទ *", "Gender *")}</label>
+                      <select 
+                        value={newProductForm.gender}
+                        onChange={(e) => updateNewProductForm('gender', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      >
+                        <option value="male">{t("ប្រុស", "Male")}</option>
+                        <option value="female">{t("ស្រី", "Female")}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("ថ្ងៃ ខែ ឆ្នាំកំណើត", "Date of Birth")}</label>
+                      <input 
+                        type="date" 
+                        value={newProductForm.dob}
+                        onChange={(e) => updateNewProductForm('dob', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("លេខអត្តសញ្ញាបណ្ណ", "National ID Card No.")}</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g., 010203045"
+                        value={newProductForm.idCard}
+                        onChange={(e) => updateNewProductForm('idCard', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("លេខទូរស័ព្ទទំនាក់ទំនង *", "Phone Number *")}</label>
+                      <input 
+                        type="tel" 
+                        required
+                        placeholder="e.g., 085555666"
+                        value={newProductForm.phone}
+                        onChange={(e) => updateNewProductForm('phone', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none focus:border-amber-500 focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("អ៊ីមែល (បើមាន)", "Email Address (Optional)")}</label>
+                      <input 
+                        type="email" 
+                        placeholder="e.g., info@artisan.com"
+                        value={newProductForm.email}
+                        onChange={(e) => updateNewProductForm('email', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="border-b border-stone-100 pb-2 pt-2">
+                    <h4 className="font-bold text-stone-800 text-xs uppercase tracking-wider text-amber-700">២. ព័ត៌មានពីការផលិត និងផលិតផល (Craft Description)</h4>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("ឈ្មោះផលិតផលខ្មែរ *", "Khmer Product Name *")}</label>
+                      <input 
+                        type="text" 
+                        required
+                        placeholder={t("ឧទាហរណ៍៖ ម្រេចកំពត, ក្រមា...", "e.g., Handcrafted Silk Scarf")}
+                        value={newProductForm.productName}
+                        onChange={(e) => updateNewProductForm('productName', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none focus:border-amber-500 focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("តម្លៃលក់រាយ ($) *", "Retail Price ($) *")}</label>
+                      <input 
+                        type="number" 
+                        required
+                        placeholder="e.g., 15"
+                        value={newProductForm.price}
+                        onChange={(e) => updateNewProductForm('price', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("ខេត្ត-ក្រុងរបស់ផលិតផល *", "Product Province *")}</label>
+                      <select 
+                        value={newProductForm.productLocation}
+                        onChange={(e) => updateNewProductForm('productLocation', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      >
+                        {KHMER_PROVINCES.map(prov => (
+                          <option key={prov} value={prov}>{prov}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] text-stone-500 block mb-1">{t("អាសយដ្ឋានទីតាំងសិប្បកម្មពិតប្រាកដ *", "Workshop Location Address *")}</label>
+                      <input 
+                        type="text" 
+                        required
+                        placeholder={t("ឃុំ/សង្កាត់ ស្រុក/ខណ្ឌ...", "e.g., Koh Dach Island, Kampong Cham")}
+                        value={newProductForm.workshopLocation}
+                        onChange={(e) => updateNewProductForm('workshopLocation', e.target.value)}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] text-stone-500 block mb-1">{t("តំណភ្ជាប់រូបភាពផលិតផល (URL)", "Product Image Link (URL)")}</label>
+                    <input 
+                      type="url" 
+                      placeholder="https://images.unsplash.com/..."
+                      value={newProductForm.productImage}
+                      onChange={(e) => updateNewProductForm('productImage', e.target.value)}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] text-stone-500 block mb-1">{t("ការរៀបរាប់ និងការផលិតលម្អិត (ជាភាសាខ្មែរ)", "Product Description & Handcrafting Technique")}</label>
+                    <textarea 
+                      rows="3" 
+                      placeholder={t("រៀបរាប់ពីផលិតផលសហគមន៍របស់អ្នក...", "Detail raw ingredients, history and technique used to handcraft this...")}
+                      value={newProductForm.descriptionKh}
+                      onChange={(e) => updateNewProductForm('descriptionKh', e.target.value)}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    ></textarea>
+                  </div>
+
+                  <div className="pt-4 border-t border-stone-100 flex items-center justify-end space-x-3 select-none">
+                    <button 
+                      type="button" 
+                      onClick={() => setShowSubmitModal(false)}
+                      className="px-5 py-3 sm:px-4 sm:py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-semibold transition-all duration-200 active:scale-95"
+                    >
+                      {t("បោះបង់", "Cancel")}
+                    </button>
+                    <button 
+                      type="submit" 
+                      className="px-5 py-3 sm:px-5 sm:py-2 bg-amber-500 hover:bg-amber-600 text-khmerMaroon font-bold rounded-xl text-xs transition-all duration-300 active:scale-95 animate-pulse"
+                    >
+                      {t("ដាក់ស្នើការចុះឈ្មោះ", "Submit Registration (Telegram Notify)")}
+                    </button>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+          )}
+
+          {/* Quick Order Secure Checkout Modal */}
+          {showCheckoutModal && checkoutProduct && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-stone-900/80 overflow-y-auto backdrop-blur-sm">
+              <div className="bg-white rounded-2xl sm:rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-stone-200 animate-scale-up">
+                
+                <div className="bg-khmerMaroon text-white p-4.5 sm:p-5 flex items-center justify-between border-b border-amber-600/30 select-none">
+                  <h3 className="font-bold text-amber-400 text-sm">🛒 {t("បញ្ជាក់ការទិញផលិតផល", "Secure Instant Checkout")}</h3>
+                  <button onClick={() => { setShowCheckoutModal(false); setCheckoutProduct(null); }} className="text-stone-300 hover:text-white transition-transform active:scale-95 p-2 -mr-2">
+                    <Icons.X />
+                  </button>
+                </div>
+
+                <form onSubmit={handleFinalCheckout} className="p-4 sm:p-6 space-y-4">
+                  
+                  <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-stone-200">
+                      <img src={checkoutProduct.image} alt={checkoutProduct.name[lang]} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-xs text-stone-855">{checkoutProduct.name[lang]}</h4>
+                      <p className="text-xs text-amber-600 font-extrabold">${checkoutProduct.price}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-stone-500 block mb-1">{t("ឈ្មោះពេញអ្នកទទួល *", "Receiver Full Name *")}</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder={currentUser ? currentUser.fullName : t("បំពេញឈ្មោះពេញរបស់អ្នក", "Name")}
+                      value={customerInfo.name}
+                      onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-stone-500 block mb-1">{t("លេខទូរស័ព្ទសម្រាប់ទាក់ទង *", "Contact Phone *")}</label>
+                    <input 
+                      type="tel" 
+                      required
+                      placeholder={currentUser ? currentUser.phone : "e.g., 085555666"}
+                      value={customerInfo.phone}
+                      onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-stone-500 block mb-1">{t("អាសយដ្ឋានដឹកជញ្ជូនលម្អិត *", "Delivery Address *")}</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder={currentUser ? currentUser.address : t("ផ្ទះលេខ, ផ្លូវលេខ, ខេត្ត...", "House/Street/Province")}
+                      value={customerInfo.address}
+                      onChange={(e) => setCustomerInfo({ ...customerInfo, address: e.target.value })}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs text-stone-500 block mb-1">{t("តំបន់ដឹកជញ្ជូន", "Delivery Region")}</label>
+                      <select 
+                        value={customerInfo.delivery}
+                        onChange={(e) => setCustomerInfo({ ...customerInfo, delivery: e.target.value })}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-2.5 focus:outline-none"
+                      >
+                        <option value="phnompenh">{t("ភ្នំពេញ ($1.5)", "Phnom Penh ($1.5)")}</option>
+                        <option value="provinces">{t("បណ្តាខេត្ត ($2.5)", "Provinces ($2.5)")}</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-xs text-stone-500 block mb-1">{t("វិធីទូទាត់ប្រាក់", "Payment Option")}</label>
+                      <select 
+                        value={customerInfo.paymentMethod}
+                        onChange={(e) => setCustomerInfo({ ...customerInfo, paymentMethod: e.target.value })}
+                        className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-2.5 focus:outline-none"
+                      >
+                        <option value="aba">ABA Pay</option>
+                        <option value="wing">Wing</option>
+                        <option value="cod">{t("ទូទាត់ពេលទំនិញដល់ដៃ (COD)", "Cash on Delivery")}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="w-full bg-amber-500 hover:bg-amber-600 text-khmerMaroon font-bold py-3.5 sm:py-3 rounded-xl transition-all duration-300 active:scale-95 text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg select-none"
+                  >
+                    <Icons.Send />
+                    {t("ផ្ញើការបញ្ជាទិញទៅតេឡេក្រាម", "Submit Order to Telegram")}
+                  </button>
+
+                </form>
+
+              </div>
+            </div>
+          )}
+
+          {/* Secure Login Modal */}
+          {showLoginModal && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-stone-900/80 overflow-y-auto backdrop-blur-sm">
+              <div className="bg-white rounded-2xl sm:rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-stone-200 animate-scale-up">
+                
+                <div className="bg-khmerMaroon text-white p-4.5 sm:p-5 flex items-center justify-between border-b border-amber-600/30 select-none">
+                  <h3 className="font-bold text-amber-400 text-sm">
+                    {loginForm.isRegister ? t("ចុះឈ្មោះគណនីអតិថិជន", "Create Account") : t("ចូលប្រើប្រាស់គណនី", "Buyer Portal Login")}
+                  </h3>
+                  <button onClick={() => setShowLoginModal(false)} className="text-stone-300 hover:text-white transition-transform active:scale-95 p-2 -mr-2">
+                    <Icons.X />
+                  </button>
+                </div>
+
+                <form onSubmit={handleUserAccess} className="p-4 sm:p-6 space-y-4">
+                  
+                  <div>
+                    <label className="text-xs text-stone-500 block mb-1">{t("ឈ្មោះគណនី (Username) *", "Username *")}</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="e.g., buyer123"
+                      value={loginForm.username}
+                      onChange={(e) => updateLoginForm('username', e.target.value)}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-stone-500 block mb-1">{t("លេខសម្ងាត់ (Password) *", "Password *")}</label>
+                    <input 
+                      type="password" 
+                      required
+                      placeholder="••••••••"
+                      value={loginForm.password}
+                      onChange={(e) => updateLoginForm('password', e.target.value)}
+                      className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                    />
+                  </div>
+
+                  {loginForm.isRegister && (
+                    <div className="space-y-4 animate-slide-down">
+                      <div>
+                        <label className="text-xs text-stone-500 block mb-1">{t("ឈ្មោះពេញរបស់អ្នក *", "Full Name *")}</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="e.g., Sok San"
+                          value={loginForm.fullName}
+                          onChange={(e) => updateLoginForm('fullName', e.target.value)}
+                          className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-stone-500 block mb-1">{t("លេខទូរស័ព្ទ *", "Phone *")}</label>
+                        <input 
+                          type="tel" 
+                          required
+                          placeholder="e.g., 085443322"
+                          value={loginForm.phone}
+                          onChange={(e) => updateLoginForm('phone', e.target.value)}
+                          className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs text-stone-500 block mb-1">{t("អាសយដ្ឋានបច្ចុប្បន្ន", "Address")}</label>
+                        <input 
+                          type="text" 
+                          placeholder="e.g., Phnom Penh"
+                          value={loginForm.address}
+                          onChange={(e) => updateLoginForm('address', e.target.value)}
+                          className="w-full text-base sm:text-xs bg-stone-50 border border-stone-200 rounded-lg p-3 sm:p-2.5 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    className="w-full bg-khmerMaroon hover:bg-khmerMaroonLight text-white font-bold py-3 sm:py-2.5 rounded-xl transition-all duration-300 active:scale-95 text-xs sm:text-sm select-none"
+                  >
+                    {loginForm.isRegister ? t("បង្កើតគណនី", "Register Now") : t("ចូលទៅកាន់ប្រព័ន្ធ", "Log In")}
+                  </button>
+
+                  <div className="text-center pt-2 select-none">
+                    <button 
+                      type="button" 
+                      onClick={() => setLoginForm({ ...loginForm, isRegister: !loginForm.isRegister })}
+                      className="text-xs text-amber-600 hover:underline transition-all py-1.5 inline-block"
+                    >
+                      {loginForm.isRegister ? t("មានគណនីរួចហើយ? ចូលគណនី", "Already have account? Login") : t("មិនទាន់មានគណនី? ចុះឈ្មោះគណនីថ្មី", "Don't have account? Register")}
+                    </button>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+          )}
+
+          {/* Contact Admin / About Us Modal Overlay */}
+          {showAdminModal && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-stone-900/80 overflow-y-auto backdrop-blur-sm">
+              <div className="bg-white rounded-2xl sm:rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-stone-200 animate-scale-up">
+                
+                <div className="bg-khmerMaroon text-white p-4.5 sm:p-5 flex items-center justify-between border-b border-amber-600/30 select-none">
+                  <h3 className="font-bold text-amber-400 text-sm">ℹ️ {t("អំពីយើង និងព័ត៌មានទំនាក់ទំនង", "About Us & Contact Us")}</h3>
+                  <button onClick={() => setShowAdminModal(false)} className="text-stone-300 hover:text-white transition-transform active:scale-95 p-2 -mr-2">
+                    <Icons.X />
+                  </button>
+                </div>
+
+                <div className="p-4 sm:p-6 space-y-5">
+                  <div className="text-center space-y-2">
+                    <div className="w-16 h-16 bg-amber-500 text-khmerMaroon rounded-full flex items-center justify-center font-bold text-xl mx-auto shadow-md">
+                      🌾
+                    </div>
+                    <h4 className="moul-font text-sm text-khmerMaroon">{t("សហគមន៍ផ្សារអនឡាញផលិតផលខ្មែរ", "Khmer Artisan E-Market")}</h4>
+                    <p className="text-xs text-stone-600 leading-relaxed text-justify">
+                      {t(
+                        "ពួកយើងគឺជាវេទិកាសហគមន៍ដែលមិនស្វែងរកប្រាក់កម្រៃ បង្កើតឡើងដើម្បីជួយផ្សព្វផ្សាយសិប្បកម្ម សម្លៀកបំពាក់ត្បាញដៃ និងកសិផលធម្មជាតិប្រពៃណីរបស់កសិករ និងអ្នកជំនាញខ្មែរនៅតាមជនបទ ឱ្យទទួលបានទីផ្សារទូលំទូលាយ និងរួមចំណែកអភិរក្សកេរដំណែលវប្បធម៌ខ្មែរ។",
+                        "We are a non-profit community platform established to showcase traditional handwoven crafts, artisan goods, and organic agricultural products from rural Cambodian creators, linking heritage preservation with viable sustainable livelihoods."
+                      )}
+                    </p>
+                  </div>
+
+                  <hr className="border-stone-200" />
+
+                  <div className="space-y-3">
+                    <h5 className="font-bold text-stone-800 text-xs uppercase tracking-wider text-amber-700">{t("ព័ត៌មានទំនាក់ទំនងស្ថាបនិក៖", "Founder Contact Details:")}</h5>
+                    <div className="bg-stone-50 p-4 rounded-xl border border-stone-200 text-xs text-stone-600 space-y-2.5">
+                      <p><strong>{t("ឈ្មោះ៖", "Name:")}</strong> {ADMIN_INFO.name[lang]}</p>
+                      <p><strong>{t("តួនាទី៖", "Title:")}</strong> {ADMIN_INFO.title[lang]}</p>
+                      <p className="flex items-center gap-2">
+                        <Icons.Phone />
+                        <strong>{t("លេខទូរស័ព្ទ៖", "Phone:")}</strong> {ADMIN_INFO.phone}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <Icons.Mail />
+                        <strong>{t("សារអេឡិចត្រូនិច៖", "Email:")}</strong> {ADMIN_INFO.email}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 pt-2 select-none">
+                    <button 
+                      onClick={() => setShowAdminModal(false)}
+                      className="flex-1 bg-stone-100 hover:bg-stone-200 text-stone-600 font-bold py-3 rounded-xl text-xs sm:text-sm transition-all duration-200 active:scale-95"
+                    >
+                      {t("បិទ", "Close")}
+                    </button>
+                    <a 
+                      href={ADMIN_INFO.telegramLink} 
+                      target="_blank" 
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs sm:text-sm block text-center transition-all duration-300 hover:scale-105 active:scale-95"
+                    >
+                      Telegram Connect
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+
+  </script>
+</body>
+</html>
